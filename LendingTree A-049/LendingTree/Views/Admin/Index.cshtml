@@ -1,0 +1,39 @@
+﻿@model LendingTree.Models.Admin
+
+@{ ViewBag.Title = "Index"; }
+
+@Html.Partial("_styling")
+
+<style>
+    .table-wrapper {
+        margin: 10px 70px 70px;
+        box-shadow: 0px 35px 50px rgba( 0, 0, 0, 0.5 );
+        display: table;
+        border-collapse: separate;
+        border-spacing: 10px;
+        border-color: gray;
+    }
+</style>
+
+
+<h3 style="text-align:center; color: cornflowerblue">
+    Welcome @HttpContext.Current.User.Identity.Name
+</h3>
+
+
+
+<hr>
+
+<h3>@Html.ActionLink("New Loan Requests", "NewLoans", "Admin")</h3>
+<hr>
+<h3>@Html.ActionLink("Approved Loans", "ApprovedLoans", "Admin")</h3>
+<hr>
+<h3>@Html.ActionLink("Rejected Loans", "DroppedLoans", "Admin")</h3>
+<hr>
+<h3>@Html.ActionLink("Check Tickets", "TicketFetch", "Admin")</h3>
+
+
+<hr>
+@Html.ActionLink("Log Out", "Logout", "Admin")
+
+

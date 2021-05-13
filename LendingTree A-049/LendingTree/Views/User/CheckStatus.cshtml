@@ -1,0 +1,59 @@
+﻿
+@{
+    ViewBag.Title = "CheckStatus";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+@Html.Partial("_styling");
+
+<style>
+    .table-wrapper {
+        margin: 10px 70px 70px;
+        box-shadow: 0px 35px 50px rgba( 0, 0, 0, 0.5 );
+        display: table;
+        border-collapse: separate;
+        border-spacing: 10px;
+        border-color: gray;
+    }
+</style>
+
+<hr>
+<h3 style="text-align:center; color: cornflowerblue">Check Loan Status</h3>
+<hr>
+
+@if (Model != null)
+{
+    IDictionary<int, string> statusDict = new Dictionary<int, string>();
+    statusDict.Add(0, "In Queue.");
+    statusDict.Add(1, "Approved by Approval Agency.");
+    statusDict.Add(2, "Approved by Pick Up Department.");
+    statusDict.Add(3, "Verified by Verification Department.");
+    statusDict.Add(4, "Approved by Legal Department.");
+    statusDict.Add(5, "Loan Sanctioned.");
+    statusDict.Add(6, "Rejected.");
+
+
+    foreach (var loan in Model)
+    {
+        string status = statusDict[loan.Status];
+        string remarks = loan.Remarks;
+        int loanId = loan.LoanId;
+
+        <table>
+            <tr>
+                <td>Your Loan status for Loan Id @loanId is: @status</td>
+                <td>Remarks: @remarks</td>
+            </tr>
+        </table>
+    }
+
+}
+
+@if (Model == null)
+{
+    <p>@ViewBag.Message</p>
+}
+
+
+

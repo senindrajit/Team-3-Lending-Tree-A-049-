@@ -1,0 +1,61 @@
+﻿
+@{
+    ViewBag.Title = "LegalDepartmentInfo";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@Html.Partial("_styling");
+
+
+<style>
+    .table-wrapper {
+        margin: 10px 70px 70px;
+        box-shadow: 0px 35px 50px rgba( 0, 0, 0, 0.5 );
+        display: table;
+        border-collapse: separate;
+        border-spacing: 10px;
+        border-color: gray;
+    }
+</style>
+
+<hr>
+<h3 style="text-align:center; color: cornflowerblue">Legal Verification</h3>
+<hr>
+<p>Click on Loan ID to see the agents available for mapping</p>
+<table class="table-wrapper">
+    <tr>
+        <th>Loan Id</th>
+        <th>Loan Amount</th>
+        <th>Due Time (Years)</th>
+        <th>Income</th>
+        <th>Loan Type</th>
+        <th>PAN Number</th>
+        <th>Aadhar Number</th>
+        <th>Bank Account Number</th>
+        <th>User</th>
+    </tr>
+
+    <tr>
+        <td>@Model.LoanId</td>
+        <td>@Model.LoanAmount</td>
+        <td>@Model.DueTime</td>
+        <td>@Model.Income</td>
+        <td>@Model.LoanType</td>
+        <td>@Model.PANNo</td>
+        <td>@Model.AadharNo</td>
+        <td>@Model.BankAccountNo</td>
+        <td>@Model.FK_User</td>
+    </tr>
+
+    <tr>
+        <td>@Html.ActionLink("Approve", "Approved", new { loanId = Model.LoanId, status = Model.Status, agentId = ViewBag.AgentId })</td>
+        <td>@Html.ActionLink("Reject", "Rejected", new { loanId = Model.LoanId, status = Model.Status, agentId = ViewBag.AgentId })</td>
+    </tr>
+
+
+
+</table>
+<hr>
+@Html.ActionLink("Log Out", "LogOut", "Agent")
+
+<hr>

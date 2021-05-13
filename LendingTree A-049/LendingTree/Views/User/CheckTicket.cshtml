@@ -1,0 +1,55 @@
+﻿
+@{
+    ViewBag.Title = "CheckTicket";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@Html.Partial("_styling");
+
+<style>
+    .table-wrapper {
+        margin: 10px 70px 70px;
+        box-shadow: 0px 35px 50px rgba( 0, 0, 0, 0.5 );
+        display: table;
+        border-collapse: separate;
+        border-spacing: 10px;
+        border-color: gray;
+    }
+</style>
+
+<hr>
+<h3 style="text-align:center; color: cornflowerblue">Check Ticket Status</h3>
+<hr>
+
+@if (Model != null)
+{
+    foreach (var ticket in Model)
+    {
+        <table>
+            <tr>
+                <td>Your resolution for Request Id @ticket.RequestId with issue: @ticket.Issue is</td>
+            </tr>
+                @if (ticket.Resolution != null)
+                {
+                    <tr>
+                        <td>@ticket.Resolution</td>
+                    </tr>
+                 }
+
+                @if (ticket.Resolution == null)
+                {
+                    <tr>
+                        <td>No resolution yet</td>
+                    </tr>
+                  }
+            
+        </table>
+    }
+
+}
+
+@if (Model == null)
+{
+    <p>@ViewBag.Message</p>
+}
+

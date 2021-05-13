@@ -1,0 +1,57 @@
+﻿
+@{
+    ViewBag.Title = "ApprovalAgency";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+@Html.Partial("_styling");
+
+<style>
+    .table-wrapper {
+        margin: 10px 70px 70px;
+        box-shadow: 0px 35px 50px rgba( 0, 0, 0, 0.5 );
+        display: table;
+        border-collapse: separate;
+        border-spacing: 10px;
+        border-color: gray;
+    }
+</style>
+
+
+<h3 style="text-align:center; color: cornflowerblue">Approval Agency</h3>
+
+<hr>
+
+<h3>@Html.ActionLink("New Loan Requests", "ApprovalAgency", new { agentId = ViewBag.AgentId })</h3>
+<hr>
+<p>Click on Loan ID to see the pending applications</p>
+
+@if (Model != null)
+{
+    <table class="table-wrapper">
+        <tr>
+            <th>Loan Id</th>
+        </tr>
+        @foreach (var loan in Model)
+        {
+
+
+            string name = loan.ToString();
+            <tr>
+                <td>
+
+                    @Html.ActionLink(name, "LoanInfo", new { loanId = loan, status = 0, agentId = ViewBag.AgentId })
+                </td>
+            </tr>
+
+
+        }
+    </table>
+}
+
+<hr>
+@Html.ActionLink("Log Out", "LogOut", "Agent")
+<hr>
+
+

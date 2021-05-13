@@ -1,0 +1,64 @@
+﻿@using LendingTree.Models
+
+@{
+    ViewBag.Title = "Tickets";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@Html.Partial("_styling");
+
+<style>
+    .table-wrapper {
+        margin: 10px 70px 70px;
+        box-shadow: 0px 35px 50px rgba( 0, 0, 0, 0.5 );
+        display: table;
+        border-collapse: separate;
+        border-spacing: 10px;
+        border-color: gray;
+        text-align: center;
+    }
+</style>
+
+
+<h3 style="text-align:center; color: cornflowerblue">New Tickets</h3>
+
+@if (Model != null)
+{
+    <table class="table-wrapper">
+
+        <tr>
+            <th>Request Id</th>
+            <th>Issue</th>
+            <th>Description</th>
+            <th>Date of ticket</th>
+            <th>User Id</th>
+
+        </tr>
+        @foreach (var ticket in Model)
+        {
+
+
+            <tr>
+                <td>@ticket.RequestId </td>
+                <td>@ticket.Issue</td>
+                <td>@ticket.Description</td>
+                <td>@ticket.DateTicket</td>
+                <td>@ticket.UserId</td>
+                <td>@Html.ActionLink("Send Resolution", "TicketResolution", new {RequestId = ticket.RequestId})
+            </tr>
+
+
+        }
+    </table>
+}
+<hr>
+
+
+@Html.ActionLink("Generate Pdf", "generatepdf", new { status = 0 })
+
+
+
+<hr>
+@Html.ActionLink("Log Out", "LogOut", "Admin")
+
+<hr>

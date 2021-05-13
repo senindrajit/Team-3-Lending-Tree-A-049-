@@ -1,0 +1,93 @@
+﻿
+@{
+    ViewBag.Title = "PickUp";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@Html.Partial("_styling");
+
+
+<style>
+    .table-wrapper {
+        margin: 10px 70px 70px;
+        box-shadow: 0px 35px 50px rgba( 0, 0, 0, 0.5 );
+        display: table;
+        border-collapse: separate;
+        border-spacing: 10px;
+        border-color: gray;
+    }
+</style>
+
+<hr>
+<h3 style="text-align:center; color: cornflowerblue">Pick Up Department</h3>
+<hr>
+<h3>@Html.ActionLink("New Loan Requests", "PickUp", new { agentId = ViewBag.AgentId })</h3>
+<hr>
+<p>Click on Loan ID to see the pending applications</p>
+
+@if (Model != null)
+{
+<table class="table-wrapper">
+    <tr>
+        <th>Loan Id</th>
+    </tr>
+
+    @{ int count = 0; }
+
+    @foreach (var loan in Model)
+    {
+
+
+        string name = loan.ToString();
+
+        if (count < 3)
+        {
+            if (name != null)
+            {
+                <tr style="color:red">
+                    <td>
+
+                        @Html.ActionLink(name, "LoanInfo", new { loanId = loan, status = 1, agentId = ViewBag.AgentId })
+                    </td>
+                </tr>
+            }
+            else
+            {
+                <tr>
+                    <td>No records found!!</td>
+                </tr>
+
+                }
+            }
+            else
+            {
+                if (name != null)
+                {
+                <tr style="color:blue">
+                    <td>
+
+                        @Html.ActionLink(name, "LoanInfo", new { loanId = loan, status = 1, agentId = ViewBag.AgentId })
+                    </td>
+                </tr>
+            }
+                else
+                {
+                <tr>
+                    <td> No records found!!</td>
+
+
+                   </tr>
+
+
+            }
+            }
+        }
+
+
+
+</table>
+}
+<hr>
+@Html.ActionLink("Log Out", "LogOut", "Agent")
+
+<hr>

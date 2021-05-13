@@ -1,0 +1,95 @@
+﻿@using LendingTree.Models
+@{
+    ViewBag.Title = "AdminInfo";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@Html.Partial("_styling");
+
+<style>
+    .table-wrapper {
+        margin: 10px 70px 70px;
+        box-shadow: 0px 35px 50px rgba( 0, 0, 0, 0.5 );
+        display: table;
+        border-collapse: separate;
+        border-spacing: 10px;
+        border-color: gray;
+    }
+</style>
+<hr>
+<h3 style="text-align:center; color: cornflowerblue">Admin Info</h3>
+
+
+@if ((int)ViewBag.flag == 0)
+{
+    <p>Click on Loan ID to see the agents available for mapping</p>
+
+    <table class="table-wrapper">
+        <tr>
+            <th>Loan Id</th>
+            <th>Loan Amount</th>
+            <th>Due Time (Years)</th>
+            <th>Income</th>
+            <th>Loan Type</th>
+            <th>PAN Number</th>
+            <th>Aadhar Number</th>
+            <th>Bank Account Number</th>
+            <th>User</th>
+        </tr>
+
+
+        @foreach (var loan in Model)
+        {
+            string id = loan.LoanId.ToString();
+
+                <tr style="color:red">
+                    <td>@Html.ActionLink(id, "AdminAgentInfo", new { loanId = loan.LoanId, deptId = (int)ViewBag.status + 1 })</td>
+                    <td>@loan.LoanAmount</td>
+                    <td>@loan.DueTime</td>
+                    <td>@loan.Income</td>
+                    <td>@loan.LoanType</td>
+                    <td>@loan.PANNo</td>
+                    <td>@loan.AadharNo</td>
+                    <td>@loan.BankAccountNo</td>
+                    <td>@loan.FK_User</td>
+                </tr>
+
+          }
+
+
+    </table>
+
+}
+
+
+@if ((int)ViewBag.flag == 1)
+{
+    <p>Click on Agent ID to map the agent</p>
+
+    <table class="table-wrapper">
+        <tr>
+            <th>Agent Id</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+        </tr>
+        @foreach (var agent in Model)
+        {
+            string id = agent.AgentId;
+            <tr>
+                <td>@Html.ActionLink(id, "AdminMapping", new { loanId = (int)ViewBag.loanID, agentId = id, deptId = (int)ViewBag.DeptId })</td>
+                <td>@agent.FirstName</td>
+                <td>@agent.LastName</td>
+            </tr>
+        }
+
+    </table>
+}
+
+
+<hr>
+@Html.ActionLink("Back", "Admin", new { status = 1 })
+<hr>
+@Html.ActionLink("Log Out", "LogOut", "Agent")
+
+
+
